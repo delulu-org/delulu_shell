@@ -1,0 +1,43 @@
+/* ── DetailsPage.css ── */
+
+.details-page {
+    min-height: 100vh;
+    position: relative;
+    background: var(--color-bg-primary, #0a0a10);
+    transition: background-color 0.2s ease;
+    overflow-x: clip;
+    color: var(--color-text-primary, #ffffff);
+}
+
+.details-loading-screen,
+.details-error-screen {
+    position: relative;
+    z-index: 2;
+    padding: 24vh 6vw;
+    color: rgba(255, 255, 255, 0.72);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 80vh;
+}
+
+.details-error-screen button {
+    padding: 10px 24px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s ease;
+}
+
+.details-error-screen button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

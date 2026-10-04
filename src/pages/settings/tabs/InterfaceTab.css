@@ -1,0 +1,250 @@
+/* ============================================
+   Interface Tab - Navigation Alignment & Controls
+   ============================================ */
+
+.interface-tab-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.interface-section-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+.interface-settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.interface-setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    user-select: none;
+}
+
+.interface-setting-label {
+    font-size: 15px;
+    font-weight: 400;
+    color: #dedee8;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Navigation Alignment Pill Selector */
+.interface-pill-selector {
+    display: inline-flex;
+    align-items: center;
+    background-color: #12121e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    padding: 3px;
+    gap: 2px;
+}
+
+.interface-pill-btn {
+    all: unset;
+    padding: 6px 16px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #75758c;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: color 130ms ease, background-color 130ms ease;
+    white-space: nowrap;
+}
+
+.interface-pill-btn:hover {
+    color: #d2d2dc;
+}
+
+/* Active Pill (Solid White with Black text) */
+.interface-pill-btn.active {
+    color: #000000;
+    background-color: #ffffff;
+    font-weight: 600;
+}
+
+/* Sub-row for Color Picker */
+.interface-setting-row-sub {
+    padding-top: 4px;
+    padding-bottom: 12px;
+}
+
+/* Color Preview Pill Button matching Screenshot 2 */
+.interface-color-pill-btn {
+    display: inline-block;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: 140px;
+    height: 32px;
+    border-radius: 9999px;
+    /* Static border and shadow — no geometric layout shifts */
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    /* Only animate paint properties (never transform/geometry) to prevent text shimmering and content shift */
+    transition: border-color 140ms ease, filter 140ms ease, box-shadow 140ms ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.interface-color-pill-btn:hover {
+    border-color: rgba(255, 255, 255, 0.95);
+    filter: brightness(1.12);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideDownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 'both' = fill-mode applies before AND after, but the layer is
+   released by the browser once the animation settles — unlike
+   'forwards' which keeps the composited layer promoted permanently */
+.anim-slide-down {
+    animation: slideDownFade 180ms ease both;
+}
+
+/* ── Interface Zoom Slider ─────────────────────────────────────── */
+.zoom-slider-shell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    min-width: 280px;
+}
+
+/* Labels row */
+.zoom-labels {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 2px;
+}
+
+.zoom-label {
+    all: unset;
+    display: block;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.32);
+    cursor: pointer;
+    transition: color 110ms ease;
+    user-select: none;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    /* Equal width so spacing is perfectly even */
+    width: 20%;
+    text-align: center;
+}
+
+.zoom-label:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.zoom-label:focus-visible {
+    color: #ffffff;
+    outline: 1px solid rgba(167, 139, 255, 0.6);
+    border-radius: 4px;
+}
+
+.zoom-label--active {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Track wrapper — positions thumb relative to track */
+.zoom-track-wrap {
+    position: relative;
+    width: 100%;
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+/* Background track */
+.zoom-track {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: visible;
+}
+
+/* Filled (left of thumb) portion */
+.zoom-track-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 99px;
+    /* GPU-composited only: no layout property changes */
+    background: linear-gradient(90deg, #6e40c9 0%, #9b6dff 100%);
+    will-change: width;
+    transition: width 90ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Draggable thumb */
+.zoom-thumb {
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #a78bff;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(130, 80, 255, 0.25);
+    /* Horizontally center the thumb on the exact position */
+    transform: translate(-50%, -50%);
+    will-change: left;
+    transition: left 90ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 110ms ease;
+    pointer-events: none; /* native input handles all events */
+}
+
+/* Native range input — invisible overlay for all interaction */
+.zoom-input-native {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    /* stretch hit target */
+    z-index: 2;
+}
+
+/* Focus ring on the shell (accessible) */
+.zoom-track-wrap:focus-within .zoom-thumb {
+    box-shadow: 0 0 0 4px rgba(130, 80, 255, 0.45);
+}
+

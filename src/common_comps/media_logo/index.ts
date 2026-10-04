@@ -1,0 +1,1 @@
+export { MediaLogo } from './MediaLogo';

@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── Random Page Layout ───────────────────────────────────────────────────────── */
+.random-page {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--color-bg-primary, #0c0b0e);
+}
+
+/* ── Header - Liquid Glass Island ────────────────────────────────────────────── */
+.random-header {
+    position: absolute;
+    bottom: 36px;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.random-header-island {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    pointer-events: auto;
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+    backdrop-filter: blur(36px) saturate(180%);
+    -webkit-backdrop-filter: blur(36px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.random-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    padding: 0 10px;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+/* ── Island Action Buttons ───────────────────────────────────────────────────── */
+.random-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.random-btn-ghost {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.random-btn-ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+.random-btn-ghost:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* ── Loading Overlay ─────────────────────────────────────────────────────────── */
+.random-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: var(--color-bg-primary, #0c0b0e);
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 20;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── 16:9 Backdrop Viewer Modal ──────────────────────────────────────────────── */
+.random-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5, 4, 8, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.random-modal-backdrop-card {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #0f0e11;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+.random-backdrop-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    z-index: 1;
+}
+
+.random-backdrop-loading {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.45);
+    background: #121114;
+}
+
+/* ── Modal Overlay Vignette & Info Panel ─────────────────────────────────────── */
+.random-modal-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: 
+        linear-gradient(
+            90deg, 
+            rgba(11, 9, 14, 0.78) 0%, 
+            rgba(11, 9, 14, 0.48) 36%, 
+            rgba(11, 9, 14, 0.15) 62%, 
+            rgba(11, 9, 14, 0) 100%
+        ),
+        linear-gradient(
+            0deg, 
+            rgba(11, 9, 14, 0.80) 0%, 
+            rgba(11, 9, 14, 0.35) 45%, 
+            rgba(11, 9, 14, 0) 80%
+        );
+}
+
+.random-modal-info {
+    position: absolute;
+    left: 40px;
+    bottom: 34px;
+    max-width: 500px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    pointer-events: auto;
+    text-align: left;
+}
+
+.random-modal-logo {
+    display: inline-flex;
+    align-items: flex-end;
+    margin-bottom: 2px;
+}
+
+.random-modal-logo .media-logo-img {
+    max-width: clamp(160px, 24vw, 320px);
+    max-height: clamp(52px, 9vh, 90px);
+    object-fit: contain;
+    object-position: left bottom;
+    filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.85));
+}
+
+.random-modal-logo .media-logo-fallback-title,
+.random-modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.4vw, 3.1rem);
+    font-weight: 400;
+    color: rgba(253, 250, 245, 0.99);
+    line-height: 1.0;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95), 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+.random-modal-overview {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(235, 230, 225, 0.85);
+    margin: 0;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+    max-width: 460px;
+}
+
+.random-modal-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.random-modal-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.random-modal-year {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(235, 230, 225, 0.75);
+}
+
+.random-modal-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    border: 0.5px solid rgba(255, 255, 255, 0.22);
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.random-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+/* Frosted glass action buttons matching details page Add to Watchlist button */
+.random-modal-info-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 18px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: rgba(243, 233, 233, 0.9);
+    font-family: var(--font-family, 'DM Sans', sans-serif);
+    cursor: pointer;
+    user-select: none;
+    -webkit-app-region: no-drag;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.random-modal-info-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    color: #ffffff;
+    will-change: transform;
+}
+
+.random-modal-info-btn:active {
+    transform: scale(0.97);
+}
+
+.random-modal-actions .card-action-btn {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: rgba(243, 233, 233, 0.9);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-app-region: no-drag;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.random-modal-actions .card-action-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    color: #ffffff;
+    will-change: transform;
+}
+
+.random-modal-actions .card-action-btn:active {
+    transform: scale(0.97);
+}
+
+.random-modal-actions .card-action-btn.active-watchlist {
+    background: rgba(229, 9, 20, 0.18);
+    border-color: rgba(229, 9, 20, 0.5);
+    color: #ff4d58;
+}
+
+.random-modal-actions .card-action-btn.active-favorites {
+    background: rgba(229, 9, 20, 0.18);
+    border-color: rgba(229, 9, 20, 0.5);
+    color: #ff4d58;
+}
+
+.random-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(243, 233, 233, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    -webkit-app-region: no-drag;
+    user-select: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.random-modal-close:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-1px);
+    will-change: transform;
+}
+
+.random-modal-close:active {
+    transform: scale(0.97);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .random-header {
+        bottom: 18px;
+    }
+    .random-header-island {
+        padding: 8px 14px;
+        gap: 8px;
+    }
+    .random-title {
+        font-size: 0.84rem;
+        padding: 0 4px;
+    }
+    .random-modal-backdrop {
+        padding: 14px;
+    }
+    .random-modal-backdrop-card {
+        border-radius: 10px;
+    }
+    .random-modal-close {
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+    }
+    .random-modal-info {
+        left: 14px;
+        bottom: 14px;
+        right: 14px;
+        max-width: calc(100% - 28px);
+        gap: 8px;
+    }
+    .random-modal-logo .media-logo-img {
+        max-width: 170px;
+        max-height: 46px;
+    }
+    .random-modal-logo .media-logo-fallback-title,
+    .random-modal-title {
+        font-size: 1.7rem;
+    }
+    .random-modal-overview {
+        font-size: 0.76rem;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+    }
+    .random-modal-info-btn {
+        height: 34px;
+        padding: 0 14px;
+        font-size: 0.78rem;
+        border-radius: 10px;
+    }
+    .random-modal-actions .card-action-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+    }
+}

@@ -1,0 +1,79 @@
+/* ── BackButton.css ── */
+
+.details-back-btn {
+    position: fixed;
+    top: 80px;
+    left: 40px;
+    z-index: 1300;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(20, 18, 24, 0.88);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
+    contain: layout paint;
+    transform: translateZ(0);
+    transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 
+        0 4px 24px -1px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+}
+
+/* Adjust back button positioning when power mode sidebar is active */
+.power-mode-active .details-back-btn {
+    left: 128px; /* 88px sidebar + 40px default margin */
+}
+
+@media (max-width: 768px) {
+    .power-mode-active .details-back-btn {
+        left: 106px; /* 88px sidebar + 18px mobile margin */
+    }
+}
+
+.details-back-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.details-back-btn:hover {
+    background: rgba(38, 34, 46, 0.96);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+    box-shadow: 
+        0 8px 28px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.details-back-btn:hover svg {
+    transform: translateX(-2px);
+}
+
+.details-back-btn:active {
+    background: rgba(14, 12, 18, 0.96);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 1024px) {
+    .details-back-btn {
+        top: 24px;
+        left: 24px;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+    }
+    .details-back-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}

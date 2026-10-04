@@ -1,0 +1,112 @@
+/* ── DiscoverGrid ──────────────────────────────────────────────────────────────
+   Infinite-scroll grid of DiscoverCards with loading state, retry button,
+   and end-of-catalog endcap.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.discover-grid-section {
+    width: min(var(--cinema-row-width), 100%);
+    margin: 78px auto 0;
+    text-align: center;
+}
+
+.discover-grid-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.9rem, 2.9vw, 2.6rem);
+    font-weight: 600;
+    color: #f6efe4;
+    margin-bottom: 26px;
+}
+
+.discover-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(120px, 12.5vw, 210px), 1fr));
+    gap: clamp(12px, 1.4vw, 20px);
+}
+
+.discover-grid__scroll-trigger {
+    width: 100%;
+    height: 2px;
+}
+
+.discover-grid__loading-slot {
+    min-height: 52px;
+}
+
+.discover-grid__loading-more {
+    width: min(320px, 100%);
+    margin: 10px auto 0;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 10px 18px;
+    color: rgba(255, 242, 224, 0.82);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(9, 9, 9, 0.72);
+}
+
+.discover-grid__error {
+    width: min(560px, 100%);
+    margin: 10px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 170, 170, 0.24);
+    background: rgba(24, 10, 10, 0.72);
+    color: rgba(255, 223, 223, 0.92);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.8rem;
+}
+
+.discover-grid__error button {
+    border: 1px solid rgba(255, 206, 206, 0.38);
+    background: transparent;
+    color: rgba(255, 234, 234, 0.95);
+    border-radius: 999px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.discover-grid__endcap {
+    width: min(380px, 100%);
+    margin: 10px auto 0;
+    text-align: center;
+    padding: 10px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(238, 229, 214, 0.6);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1360px) {
+    .discover-grid {
+        grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
+    }
+}
+
+@media (max-width: 1120px) {
+    .discover-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .discover-grid-section {
+        margin-top: 56px;
+    }
+
+    .discover-grid {
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+        gap: 14px;
+    }
+}

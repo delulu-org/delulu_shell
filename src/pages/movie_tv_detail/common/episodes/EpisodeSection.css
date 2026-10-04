@@ -1,0 +1,60 @@
+/* ── EpisodeSection.css ──
+   Container for Season dropdown and list of episodes
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.season-episode-selector {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.episodes-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Loading / Error / Empty States */
+.episodes-loading,
+.episodes-error,
+.episodes-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 60px 24px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+.episodes-spinner {
+    width: 28px;
+    height: 28px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #e50914;
+    border-radius: 50%;
+    animation: spinEpisodes 0.8s linear infinite;
+}
+
+@keyframes spinEpisodes {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.episodes-error button {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.episodes-error button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    will-change: background-color;
+}

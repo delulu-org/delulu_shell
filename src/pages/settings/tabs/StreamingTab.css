@@ -1,0 +1,486 @@
+/* ============================================
+   Streaming Tab - Settings UI
+   Single Continuous Scrollable Experience
+   ============================================ */
+
+.streaming-tab-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.streaming-section-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+/* --------------------------------------------
+   Server URL & Status Table Card
+   -------------------------------------------- */
+
+.streaming-server-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.streaming-table-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px 8px;
+    box-sizing: border-box;
+}
+
+.streaming-col-header {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #7c7c98;
+    letter-spacing: -0.01em;
+}
+
+.streaming-col-header.status {
+    padding-right: 32px;
+}
+
+.streaming-server-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    padding: 0 24px;
+    background-color: #141424;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    box-sizing: border-box;
+    transition: border-color 140ms ease;
+}
+
+.streaming-server-card:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.streaming-server-left {
+    display: flex;
+    align-items: center;
+}
+
+.streaming-url-text {
+    font-size: 14.5px;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    user-select: text;
+}
+
+.streaming-server-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.streaming-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+.streaming-status-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------
+   Settings Rows & Cache Path Pill Button
+   -------------------------------------------- */
+
+.streaming-settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.streaming-setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    padding: 8px 0;
+    user-select: none;
+}
+
+.streaming-setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+    padding-right: 24px;
+}
+
+.streaming-setting-label {
+    font-size: 15px;
+    font-weight: 400;
+    color: #dedee8;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.streaming-setting-subtext {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #7b7b92;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    user-select: none;
+}
+
+.streaming-setting-control {
+    width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+/* Cache Path Pill Button */
+.streaming-path-pill-btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 38px;
+    box-sizing: border-box;
+    background-color: #151525;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    padding: 0 18px;
+    cursor: pointer;
+    transition: background-color 140ms ease, border-color 140ms ease;
+    user-select: none;
+}
+
+.streaming-path-pill-btn:hover {
+    background-color: #1a1a2e;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.streaming-path-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------
+   Custom BitTorrent Profile Settings Panel
+   -------------------------------------------- */
+
+.streaming-custom-panel {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 16px 20px;
+    background-color: #0f0f1c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-sizing: border-box;
+    animation: streamingFadeIn 160ms ease;
+    gap: 2px;
+}
+
+.streaming-custom-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.streaming-custom-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.streaming-custom-hint {
+    font-size: 12px;
+    color: #7b7b92;
+}
+
+.streaming-setting-row.sub-row {
+    min-height: 48px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+}
+
+.streaming-setting-row.sub-row:last-child {
+    border-bottom: none;
+}
+
+.streaming-custom-input {
+    all: unset;
+    width: 120px;
+    height: 36px;
+    box-sizing: border-box;
+    background-color: #16162a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 0 16px;
+    font-size: 13.5px;
+    color: #ffffff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    text-align: right;
+    transition: border-color 140ms ease, background-color 140ms ease;
+    user-select: text;
+}
+
+.streaming-custom-input.wide {
+    width: 165px;
+}
+
+.streaming-custom-input:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    background-color: #1c1c34;
+}
+
+.streaming-custom-input:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: #1e1e38;
+}
+
+.streaming-custom-input::-webkit-outer-spin-button,
+.streaming-custom-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.streaming-custom-input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* --------------------------------------------
+   Cache Path Modal Dialog
+   Solid Black Background + Crisp White Border
+   -------------------------------------------- */
+
+.streaming-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: streamingFadeIn 120ms ease;
+}
+
+.streaming-modal-dialog {
+    width: 100%;
+    max-width: 480px;
+    background-color: #000000;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: streamingFadeIn 140ms ease;
+}
+
+@keyframes streamingFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.streaming-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.streaming-modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.streaming-modal-close-btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #8f8fa8;
+    cursor: pointer;
+    transition: background-color 120ms ease, color 120ms ease;
+}
+
+.streaming-modal-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.streaming-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.streaming-modal-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.streaming-modal-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8f8fa8;
+    letter-spacing: -0.01em;
+}
+
+.streaming-current-path-box {
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-sizing: border-box;
+}
+
+.streaming-current-path-text {
+    font-size: 13.5px;
+    color: #ffffff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    word-break: break-all;
+    user-select: text;
+}
+
+/* Change Cache Path Button (White background and rounded pill border like save changes button) */
+.streaming-modal-change-path-btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 42px;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 140ms ease;
+    user-select: none;
+    margin-top: 4px;
+}
+
+.streaming-modal-change-path-btn:hover {
+    background-color: #ededf4;
+}
+
+.streaming-modal-change-path-btn:active {
+    background-color: #dedee8;
+}
+
+/* Pending Selected Path Badge */
+.streaming-pending-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    margin-top: 6px;
+}
+
+.streaming-pending-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #a5b4fc;
+    flex-shrink: 0;
+}
+
+.streaming-pending-value {
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    word-break: break-all;
+}
+
+/* Modal Footer */
+.streaming-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.streaming-modal-btn.cancel {
+    all: unset;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #181826;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    transition: background-color 140ms ease, border-color 140ms ease;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.streaming-modal-btn.cancel:hover {
+    background-color: #242438;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.streaming-modal-btn.save {
+    all: unset;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 140ms ease;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.streaming-modal-btn.save:hover {
+    background-color: #ededf4;
+}

@@ -1,0 +1,120 @@
+/* ============================================
+   General Tab - Profile, Links, Trakt & Discord
+   ============================================ */
+
+.general-tab-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.general-profile-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    user-select: none;
+}
+
+/* Avatar Button - Pure SVG without container border or ring */
+.general-avatar-btn {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.general-avatar-btn:hover {
+    transform: scale(1.06);
+    will-change: transform;
+}
+
+.general-avatar-btn:not(:hover) {
+    will-change: auto;
+}
+
+.general-avatar-img {
+    width: 80px !important;
+    height: 80px !important;
+    display: block;
+}
+
+/* Profile Text Group */
+.general-profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+}
+
+.general-profile-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.general-profile-auth-btn {
+    all: unset;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #8c8c9e;
+    cursor: pointer;
+    transition: color 130ms ease;
+    line-height: 1.2;
+}
+
+.general-profile-auth-btn:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Divider Line */
+.general-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.06);
+    margin: 36px 0 28px;
+    width: 100%;
+}
+
+/* Quick Links - Dimmed white by default, clear white on hover */
+.general-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.general-text-link {
+    all: unset;
+    font-size: 14.5px;
+    color: #8c8c9e;
+    cursor: pointer;
+    transition: color 130ms ease;
+    width: fit-content;
+}
+
+.general-text-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+/* Inline Discord Activity Row */
+.general-setting-inline-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    user-select: none;
+}
+
+.general-setting-label {
+    font-size: 15px;
+    font-weight: 400;
+    color: #dedee8;
+    letter-spacing: -0.01em;
+}

@@ -1,0 +1,33 @@
+/* ── DetailWatchlistBtn.css ── */
+
+.detail-watchlist-btn {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: rgba(243, 233, 233, 0.9);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: var(--font-family);
+    user-select: none;
+}
+
+.detail-watchlist-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+
+.detail-watchlist-btn.is-active {
+    background: rgba(229, 9, 20, 0.18);
+    border-color: rgba(229, 9, 20, 0.5);
+    color: #ff4d58;
+}

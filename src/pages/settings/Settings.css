@@ -1,0 +1,166 @@
+/* ============================================
+   Delulu Stream - Settings Page Base Layout
+   Single Continuous Scrollable Experience
+   ============================================ */
+
+.settings-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--color-bg-primary, #0a0a10);
+    background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.04), transparent);
+    transition: background-color 0.2s ease;
+    color: #ffffff;
+    padding-top: 64px; /* DefaultNav clearance */
+    box-sizing: border-box;
+}
+
+.settings-layout {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 64px);
+    position: relative;
+}
+
+/* --------------------------------------------
+   Left Sub-tabs Sidebar & Bottom Metadata
+   -------------------------------------------- */
+
+.settings-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    padding: 88px 16px 40px 28px;
+    position: sticky;
+    top: 64px;
+    height: calc(100vh - 64px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.settings-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-tab-btn {
+    all: unset;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #727284;
+    cursor: pointer;
+    text-align: left;
+    transition: color 140ms ease, background-color 140ms ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.settings-tab-btn:hover {
+    color: #d2d2dc;
+    background-color: rgba(255, 255, 255, 0.03);
+    will-change: transform;
+}
+
+.settings-tab-btn:not(:hover) {
+    will-change: auto;
+}
+
+/* Active Sub-tab Pill Capsule - Pure solid white with black text */
+.settings-tab-btn.active {
+    color: #000000;
+    font-weight: 600;
+    background-color: #ffffff;
+    box-shadow: none;
+}
+
+.settings-tab-btn.active:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+/* Sidebar Bottom Version Metadata - Enlarged and clearer */
+.settings-sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 24px 22px 14px;
+    font-size: 13.5px;
+    color: #6a6a82;
+    line-height: 1.5;
+    user-select: none;
+}
+
+.settings-meta-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --------------------------------------------
+   Center-Aligned Continuous Content Column
+   -------------------------------------------- */
+
+.settings-content-wrapper {
+    flex: 1;
+    min-width: 0;
+    padding: 88px 32px 140px;
+    box-sizing: border-box;
+}
+
+.settings-content-column {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-scroll-section {
+    scroll-margin-top: 100px;
+    width: 100%;
+}
+
+.settings-continuous-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin: 48px 0 36px;
+    width: 100%;
+}
+
+/* --------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------- */
+
+@media (max-width: 860px) {
+    .settings-layout {
+        flex-direction: column;
+    }
+
+    .settings-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        padding: 24px 20px 10px;
+    }
+
+    .settings-nav-list {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .settings-sidebar-footer {
+        display: none;
+    }
+
+    .settings-content-wrapper {
+        padding: 20px 20px 60px;
+    }
+}

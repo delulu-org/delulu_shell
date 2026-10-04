@@ -1,0 +1,43 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+
+# Production & Build outputs
+dist/
+dist-ssr/
+
+# Environment files & Secrets
+.env
+.env.*
+!.env.example
+
+# Rust & Cargo build artifacts
+target/
+src-tauri/target/
+src-tauri/.cargo/
+**/*.rs.bk
+*.pdb
+
+# Editor & IDE files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

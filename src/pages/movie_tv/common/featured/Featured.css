@@ -1,0 +1,323 @@
+/* ── Featured ──────────────────────────────────────────────────────────────────
+   The large featured section: info panel (left) + swipe canvas (right).
+   Shared between Movies and TV pages. All class names kept exactly as
+   they were in tauri.deluluapp/Movies.css so the design is 1:1 identical.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.movies-cinema-featured {
+    width: min(var(--cinema-max-width), 100%);
+    margin: 0 auto 164px;
+    display: grid;
+    grid-template-columns: minmax(330px, 0.86fr) minmax(640px, 1.14fr);
+    align-items: center;
+    column-gap: 64px;
+    min-height: clamp(460px, 52vh, 600px);
+}
+
+.movies-cinema-featured-info {
+    max-width: 480px;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 440px;
+}
+
+.movies-cinema-featured-info h1,
+.movies-cinema-featured-info .media-logo-hero .media-logo-fallback-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 3.6vw, 3.8rem);
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    margin-bottom: 14px;
+    max-width: 16ch;
+    min-height: 76px;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.movies-cinema-featured-info .media-logo-hero {
+    margin-bottom: 14px;
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.movies-cinema-featured-info .media-logo-hero .media-logo-img {
+    max-width: min(320px, 100%);
+    max-height: 84px;
+    object-fit: contain;
+    object-position: left center;
+    filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.7));
+}
+
+.movies-cinema-overview {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.68;
+    color: var(--cinema-muted);
+    max-width: 42ch;
+    min-height: 88px;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.movies-cinema-featured-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    margin-bottom: 22px;
+}
+
+.movies-cinema-featured-meta span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 245, 228, 0.73);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.movies-cinema-featured-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 48px;
+    overflow: visible;
+}
+
+.movies-cinema-btn {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: transform 250ms ease, border-color 250ms ease, background 250ms ease, filter 250ms ease;
+}
+
+.movies-cinema-btn:hover {
+    transform: translateY(-1px);
+    will-change: transform;
+}
+
+.movies-cinema-btn-primary {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #fffaf4;
+    background: linear-gradient(140deg, rgba(var(--feature-rgb), 0.88), rgba(var(--feature-rgb), 0.58));
+    box-shadow: none;
+}
+
+.movies-cinema-btn-primary:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    filter: brightness(1.15);
+    box-shadow: none;
+}
+
+.movies-cinema-btn-ghost {
+    background: transparent;
+    color: rgba(255, 243, 225, 0.88);
+    border: 1px solid var(--cinema-outline);
+}
+
+.movies-cinema-btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.26);
+}
+
+.movies-cinema-featured-canvas {
+    justify-self: center;
+    width: min(800px, 100%);
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 26px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+    box-shadow:
+        0 24px 50px rgba(0, 0, 0, 0.65),
+        0 0 42px rgba(var(--feature-rgb), 0.26);
+}
+
+.movies-cinema-featured-canvas::after {
+    display: none;
+}
+
+.movies-cinema-featured-canvas img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.movies-cinema-featured-image-base,
+.movies-cinema-featured-image-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.movies-cinema-featured-image-base {
+    z-index: 0;
+}
+
+.movies-cinema-featured-image-overlay {
+    z-index: 1;
+    transform: translateX(100%);
+}
+
+.movies-cinema-featured-image-overlay.is-sliding {
+    transform: translateX(0%);
+    will-change: transform;
+    transition: transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Typing-reveal animation for info panel on slide change */
+.movies-cinema-featured-info-typing h1,
+.movies-cinema-featured-info-typing .movies-cinema-logo-wrap,
+.movies-cinema-featured-info-typing .movies-cinema-overview,
+.movies-cinema-featured-info-typing .movies-cinema-featured-meta {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    animation: moviesTypeReveal 520ms steps(20, end) forwards;
+}
+
+.movies-cinema-featured-info-typing h1,
+.movies-cinema-featured-info-typing .movies-cinema-logo-wrap {
+    animation-delay: 90ms;
+}
+
+.movies-cinema-featured-info-typing .movies-cinema-overview {
+    animation-delay: 180ms;
+}
+
+.movies-cinema-featured-info-typing .movies-cinema-featured-meta {
+    animation-delay: 290ms;
+}
+
+/* Actions fade in smoothly without any clip-path so buttons never get cropped */
+.movies-cinema-featured-info-typing .movies-cinema-featured-actions {
+    opacity: 0;
+    animation: moviesActionsFade 380ms ease forwards;
+    animation-delay: 350ms;
+}
+
+@keyframes moviesActionsFade {
+    0% {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes moviesTypeReveal {
+    0% {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+    }
+
+    99% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+
+    100% {
+        opacity: 1;
+        clip-path: none;
+    }
+}
+
+/* Responsive */
+@media (max-width: 1120px) {
+    .movies-cinema-featured {
+        grid-template-columns: 1fr;
+        row-gap: 28px;
+        margin-bottom: 124px;
+        min-height: auto;
+    }
+
+    .movies-cinema-featured-info {
+        max-width: min(560px, 100%);
+        text-align: center;
+        min-height: auto;
+        grid-template-rows: auto;
+    }
+
+    .movies-cinema-overview {
+        margin: 0 auto;
+        max-width: 56ch;
+        min-height: 0;
+        max-height: none;
+        line-clamp: unset;
+        -webkit-line-clamp: unset;
+        display: block;
+        padding-bottom: 0;
+    }
+
+    .movies-cinema-overview::after {
+        display: none;
+    }
+
+    .movies-cinema-featured-info h1,
+    .movies-cinema-featured-info .media-logo-hero .media-logo-fallback-title {
+        min-height: 0;
+        max-width: 100%;
+        line-clamp: unset;
+        -webkit-line-clamp: unset;
+        display: block;
+    }
+
+    .movies-cinema-featured-info .media-logo-hero {
+        min-height: 0;
+        justify-content: center;
+    }
+
+    .movies-cinema-featured-info .media-logo-hero .media-logo-img {
+        object-position: center;
+    }
+
+    .movies-cinema-featured-meta,
+    .movies-cinema-featured-actions {
+        min-height: 0;
+    }
+
+    .movies-cinema-featured-meta,
+    .movies-cinema-featured-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 720px) {
+    .movies-cinema-featured-info h1 {
+        font-size: clamp(2.1rem, 8.8vw, 3.1rem);
+    }
+
+    .movies-cinema-featured-canvas {
+        border-radius: 20px;
+    }
+}

@@ -1,0 +1,235 @@
+/* ── SeasonDropdown.css ──
+   Apple TV+ style season dropdown menu
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.season-dropdown-container {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.season-dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.season-dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+    will-change: background-color, border-color;
+}
+
+.season-dropdown-label {
+    letter-spacing: 0.01em;
+}
+
+.season-dropdown-arrow {
+    opacity: 0.6;
+    transition: transform 0.2s ease;
+}
+
+.season-dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.season-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    min-width: 280px;
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    z-index: 100;
+    animation: dropdownOpen 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: top center;
+    overflow: hidden;
+}
+
+/* Subtle inner shadow for scroll edges */
+.season-dropdown-menu::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 16px;
+    box-shadow:
+        inset 0 12px 12px -12px rgba(0, 0, 0, 0.5),
+        inset 0 -12px 12px -12px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.season-dropdown-scroll-content {
+    max-height: 380px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 8px;
+}
+
+/* Custom scrollbar */
+.season-dropdown-scroll-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.season-dropdown-scroll-content::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 0;
+}
+
+.season-dropdown-scroll-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+.season-dropdown-scroll-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+@keyframes dropdownOpen {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.season-dropdown-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 2px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    opacity: 0;
+    animation: itemStagger 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--stagger-idx) * 35ms);
+}
+
+@keyframes itemStagger {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.season-dropdown-item:last-child {
+    margin-bottom: 0;
+}
+
+.season-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+    will-change: transform;
+}
+
+/* Accent line on hover */
+.season-dropdown-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(-100%);
+    width: 3px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 0 4px 4px 0;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 5;
+}
+
+.season-dropdown-item:hover::before {
+    transform: translateY(-50%) translateX(0);
+}
+
+.season-dropdown-item.active {
+    background: rgba(229, 9, 20, 0.12);
+    color: #fff;
+    transform: scale(1.03);
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Red accent line overrides hover */
+.season-dropdown-item.active::before {
+    background: #e50914;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Soft light sweep on active item */
+.season-dropdown-item.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    animation: lightSweep 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightSweep {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
+}
+
+.season-episode-count {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.35);
+    transition: color 0.2s ease;
+}
+
+.season-dropdown-item:hover .season-episode-count {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.season-dropdown-item.active .season-episode-count {
+    color: rgba(255, 255, 255, 0.85);
+}

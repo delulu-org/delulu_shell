@@ -1,0 +1,57 @@
+.navbar-window-controls {
+    display: flex;
+    align-items: center;
+    margin-left: clamp(6px, 1vw, var(--spacing-md, 16px));
+    padding-left: clamp(6px, 1vw, var(--spacing-md, 16px));
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-window-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    -webkit-app-region: no-drag;
+}
+
+.navbar-window-btn:hover {
+    color: var(--color-text-primary, #ffffff);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-window-btn-close:hover {
+    background: var(--color-accent-primary, #e50914);
+    color: white;
+}
+
+@media (max-width: 900px) {
+    .navbar-window-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-window-controls {
+        margin-left: 4px;
+        padding-left: 4px;
+    }
+}
+
+@media (max-width: 620px) {
+    .navbar-window-btn {
+        width: 28px;
+        height: 28px;
+    }
+
+    .navbar-window-btn svg {
+        transform: scale(0.9);
+    }
+}

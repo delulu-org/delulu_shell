@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Ultimate Polyfill: Target the prototype itself
+      (function() {
+        try {
+          const mock = [];
+          mock.refresh = function() {};
+          if (window.Navigator) {
+            Object.defineProperty(Navigator.prototype, 'plugins', { get: () => mock, configurable: true });
+            Object.defineProperty(Navigator.prototype, 'mimeTypes', { get: () => ({}), configurable: true });
+          }
+          // Also define on instance just in case
+          Object.defineProperty(navigator, 'plugins', { get: () => mock, configurable: true });
+          Object.defineProperty(navigator, 'mimeTypes', { get: () => ({}), configurable: true });
+        } catch (e) {}
+        
+        window.addEventListener('error', function(e) {
+          if (e.message && (e.message.includes('plugins') || e.message.includes('mimeTypes'))) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delulu</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

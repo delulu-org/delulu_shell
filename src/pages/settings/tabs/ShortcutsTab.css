@@ -1,0 +1,103 @@
+/* ============================================
+   Shortcuts Tab - Stremio Matching Design
+   Clean Minimal Row Layout with Pill Keycaps
+   ============================================ */
+
+.shortcuts-tab-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 420px; /* Generous blank space at the bottom to allow comfortable scrolling */
+}
+
+.shortcuts-section-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px 0;
+}
+
+.shortcuts-group-title {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #7c7c98;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.01em;
+}
+
+.shortcuts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.shortcuts-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 6px 0;
+    gap: 20px;
+    user-select: none;
+}
+
+.shortcuts-action {
+    font-size: 15px;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.shortcuts-keys-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px 6px;
+    max-width: 440px;
+}
+
+.shortcuts-key {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 34px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    background-color: #151525;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+    white-space: nowrap;
+    user-select: none;
+    transition: background-color 140ms ease, border-color 140ms ease;
+}
+
+.shortcuts-key:hover {
+    background-color: #1c1c32;
+    border-color: rgba(255, 255, 255, 0.16);
+}
+
+.shortcuts-operator {
+    font-size: 13.5px;
+    color: #7c7c98;
+    margin: 0 4px;
+    user-select: none;
+}
+
+.shortcuts-connector {
+    font-size: 13.5px;
+    color: #7c7c98;
+    margin: 0 6px;
+    user-select: none;
+}

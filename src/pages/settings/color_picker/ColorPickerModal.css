@@ -1,0 +1,219 @@
+/* ============================================
+   Delulu Color Picker Modal - Solid Black & Crisp White Border
+   ============================================
+
+   PERFORMANCE NOTES (tauri-rendering-performance-bible):
+   - §2.5B: Only ONE backdrop-filter layer active at a time.
+     Overlay uses a solid semi-transparent bg (no blur).
+     Dialog itself has no backdrop-filter — solid #000000 bg.
+   - §2.6: will-change applied on :hover only, removed after.
+   - Animations use compositor-only properties (opacity, transform).
+   ============================================ */
+
+/* Overlay — NO backdrop-filter (avoids double-blur stacking with any
+   existing glass elements behind the modal). Solid semi-transparent bg
+   provides the same visual dimming at zero extra GPU composite cost. */
+.color-picker-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: colorPickerFadeIn 140ms ease forwards;
+}
+
+@keyframes colorPickerFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Dialog — solid opaque background, no backdrop-filter */
+.color-picker-dialog {
+    width: 324px;
+    background-color: #000000;
+    border: 1.5px solid rgba(255, 255, 255, 0.32);
+    border-radius: 20px;
+    padding: 20px;
+    /* Static shadow — no transition needed, box-shadow can't be GPU-composited */
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.98), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    user-select: none;
+    animation: colorPickerScaleIn 160ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes colorPickerScaleIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.color-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.color-picker-title {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.color-picker-close-btn {
+    all: unset;
+    color: #72728c;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 2px 6px;
+    line-height: 1;
+    border-radius: 6px;
+    /* transition only color — compositor-friendly */
+    transition: color 120ms ease;
+}
+
+.color-picker-close-btn:hover {
+    color: #ffffff;
+}
+
+/* ── 2D Saturation / Value Gradient Canvas ─────────────── */
+.color-picker-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    cursor: crosshair;
+    touch-action: none;
+    background-color: transparent;
+}
+
+.color-picker-canvas-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+/* Canvas Thumb — promote to its own layer only while dragging
+   (handled via pointer capture; static will-change avoided) */
+.color-picker-canvas-thumb {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2.5px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), inset 0 0 2px rgba(0, 0, 0, 0.5);
+    background: transparent;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+/* ── Sliders Area ──────────────────────────────────────── */
+.color-picker-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.color-picker-slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.color-picker-slider-bar {
+    width: 100%;
+    height: 12px;
+    border-radius: 9999px;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Hue Rainbow Bar */
+.hue-bar {
+    background: linear-gradient(
+        to right,
+        #ff0000 0%,
+        #ffff00 17%,
+        #00ff00 33%,
+        #00ffff 50%,
+        #0000ff 67%,
+        #ff00ff 83%,
+        #ff0000 100%
+    );
+}
+
+/* Alpha Opacity Bar with Checkerboard Pattern */
+.alpha-bar {
+    overflow: hidden;
+    background-image:
+        linear-gradient(45deg, #363636 25%, transparent 25%),
+        linear-gradient(-45deg, #363636 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #363636 75%),
+        linear-gradient(-45deg, transparent 75%, #363636 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+    background-color: #1a1a1a;
+}
+
+.alpha-bar-gradient {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+}
+
+/* Slider Thumb (Scrubber Knob) */
+.color-picker-slider-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2.5px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), inset 0 0 2px rgba(0, 0, 0, 0.5);
+    background: transparent;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+/* ── Select Button ─────────────────────────────────────── */
+.color-picker-select-btn {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 9999px;
+    cursor: pointer;
+    /* Only animate opacity/transform — compositor-only, no repaint */
+    transition: opacity 140ms ease, transform 100ms ease;
+    margin-top: 4px;
+}
+
+.color-picker-select-btn:hover {
+    opacity: 0.88;
+    will-change: transform;
+}
+
+.color-picker-select-btn:not(:hover) {
+    will-change: auto;
+}
+
+.color-picker-select-btn:active {
+    transform: scale(0.98);
+}

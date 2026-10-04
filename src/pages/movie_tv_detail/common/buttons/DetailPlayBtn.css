@@ -1,0 +1,56 @@
+/* ── DetailPlayBtn.css ── */
+
+.detail-play-btn {
+    padding: 16px 36px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    letter-spacing: 0.3px;
+    background: linear-gradient(180deg, rgba(240, 30, 40, 0.92) 0%, rgba(210, 15, 20, 0.92) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 40px;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow:
+        0 6px 16px rgba(210, 15, 20, 0.25),
+        0 2px 4px rgba(210, 15, 20, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.35),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1), background 240ms ease;
+    transform: scale(1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    user-select: none;
+}
+
+.detail-play-btn:hover:not(:disabled) {
+    transform: scale(1.02);
+    will-change: transform;
+    background: linear-gradient(180deg, rgba(245, 35, 45, 0.94) 0%, rgba(215, 20, 25, 0.94) 100%);
+    box-shadow:
+        0 12px 28px rgba(210, 15, 20, 0.28),
+        0 4px 10px rgba(210, 15, 20, 0.18),
+        inset 0 1px 1px rgba(255, 255, 255, 0.40),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.detail-play-btn:active:not(:disabled) {
+    transition: all 120ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform: scale(1.0);
+    background: linear-gradient(180deg, rgba(230, 20, 30, 0.92) 0%, rgba(200, 10, 15, 0.92) 100%);
+    box-shadow:
+        0 2px 6px rgba(210, 15, 20, 0.25),
+        inset 0 2px 4px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.detail-play-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}

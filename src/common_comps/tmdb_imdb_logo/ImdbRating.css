@@ -1,0 +1,30 @@
+.imdb-rating-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    vertical-align: middle;
+}
+
+.imdb-rating-logo-svg {
+    height: 14px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.imdb-rating-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 1;
+}
+
+/* In details page metadata row, scale up to match emojis and metadata text */
+.details-rating-imdb .imdb-rating-logo-svg {
+    height: 20px;
+}
+
+.details-rating-imdb .imdb-rating-text {
+    font-size: 18px;
+    font-weight: 800;
+}

@@ -1,0 +1,38 @@
+/* ── AppLogo.css ── */
+
+.app-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-app-region: no-drag;
+}
+
+.app-logo-icon {
+    object-fit: contain;
+    display: block;
+    /* Static brand red ambient glow - no jump or hover animation */
+    filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.45));
+}
+
+/* ── Size Variants ── */
+
+/* Small (e.g. compact bars) */
+.app-logo--sm .app-logo-icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* Medium (Navbar default - perfectly balanced) */
+.app-logo--md .app-logo-icon {
+    width: 36px;
+    height: 36px;
+}
+
+/* Large (Splash or Settings) */
+.app-logo--lg .app-logo-icon {
+    width: 48px;
+    height: 48px;
+}

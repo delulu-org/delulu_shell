@@ -1,0 +1,79 @@
+/* ── BackToTopBtn.css ──
+   Floating frosted glass back-to-top button
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes back-to-top-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.back-to-top-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1300;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    box-shadow:
+        0 4px 24px -1px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    animation: back-to-top-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-to-top-btn svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-to-top-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transform: scale(1.08) translateY(-4px);
+    box-shadow:
+        0 12px 32px -4px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    will-change: transform;
+}
+
+.back-to-top-btn:hover svg {
+    transform: translateY(-1px);
+}
+
+.back-to-top-btn:active {
+    transform: scale(0.94) translateY(0);
+    transition-duration: 0.2s;
+}
+
+@media (max-width: 768px) {
+    .back-to-top-btn {
+        right: 14px;
+        bottom: 14px;
+        width: 42px;
+        height: 42px;
+    }
+}

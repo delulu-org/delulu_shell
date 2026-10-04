@@ -1,0 +1,43 @@
+/* ── Top 3 / What's Burning section ── */
+
+.top3-section {
+    margin-bottom: 8px;
+}
+
+.top3-grid {
+    width: auto;
+    max-width: none;
+    padding: var(--spacing-xs, 4px) 0 var(--spacing-sm, 8px);
+    margin-left: clamp(24px, 4vw, 48px);
+    margin-right: clamp(24px, 4vw, 48px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    gap: clamp(14px, 1.25vw, 24px);
+}
+
+@media (max-width: 1200px) {
+    .top3-grid {
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .top3-grid {
+        width: auto;
+        max-width: none;
+        padding: var(--spacing-sm, 8px) 0;
+        margin-left: 16px;
+        margin-right: 16px;
+        grid-template-columns: 1fr;
+    }
+}
+
+.top3-skeleton-card {
+    cursor: default !important;
+    pointer-events: none !important;
+}
+
+.top3-skeleton-card:hover {
+    transform: none !important;
+}
+

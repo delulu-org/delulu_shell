@@ -1,0 +1,43 @@
+.settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 20px;
+    background-color: #0d0d12;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.settings-row:hover {
+    background-color: #121218;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.settings-row-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.settings-row-title {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #f4f4f6;
+    letter-spacing: -0.01em;
+}
+
+.settings-row-desc {
+    font-size: 13px;
+    color: #7b7b8f;
+    line-height: 1.45;
+}
+
+.settings-row-control {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}

@@ -1,0 +1,158 @@
+/* ── LeftAlignedNav.css ── */
+
+/* ── 68px Sleek Left Vertical Sidebar ── */
+.power-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 68px;
+    background: var(--color-bg-primary, #0a0a10);
+    border-right: none;
+    transition: background-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 16px 0;
+    z-index: 1000;
+}
+
+/* Sidebar Brand Logo - Anchored at Top (exact 64px header height & center) */
+.sidebar-brand {
+    height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+.sidebar-brand .app-logo {
+    pointer-events: auto;
+}
+
+/* Middle Section - Nav Icons Vertically Centered in Available Space */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin: auto 0; /* Perfectly centers middle nav items between top logo and bottom settings */
+}
+
+.sidebar-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.45);
+    transition: color 0.15s ease, opacity 0.15s ease;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 0;
+    user-select: none;
+}
+
+.sidebar-link svg {
+    fill: none;
+    stroke: currentColor;
+    transition: color 0.15s ease, stroke 0.15s ease, fill 0.15s ease;
+}
+
+.sidebar-link:hover {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Selected state: White fill, no red color, no left indicator bar */
+.sidebar-link.active {
+    color: #ffffff;
+}
+
+.sidebar-link.active svg {
+    fill: #ffffff;
+    stroke: #ffffff;
+}
+
+/* Architectural cutouts for active icon geometries against sidebar background */
+.sidebar-link.active svg.lucide-clapperboard path:nth-child(2),
+.sidebar-link.active svg.lucide-clapperboard path:nth-child(3) {
+    stroke: var(--color-bg-sidebar-cutout, var(--color-bg-primary, #0a0a10));
+    stroke-width: 2.2;
+}
+
+.sidebar-link.active svg.lucide-calendar path:last-child {
+    stroke: var(--color-bg-sidebar-cutout, var(--color-bg-primary, #0a0a10));
+    stroke-width: 2;
+}
+
+.sidebar-link.active svg.lucide-dices path[d*="h.01"] {
+    stroke: var(--color-bg-sidebar-cutout, var(--color-bg-primary, #0a0a10));
+    stroke-width: 2.6;
+}
+
+.sidebar-link.active svg.lucide-settings circle {
+    fill: var(--color-bg-sidebar-cutout, var(--color-bg-primary, #0a0a10));
+    stroke: var(--color-bg-sidebar-cutout, var(--color-bg-primary, #0a0a10));
+}
+
+/* Bottom Section - Settings Anchored at Bottom */
+.sidebar-bottom {
+    margin-top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding-bottom: 8px;
+}
+
+/* ── Top Window Bar in Power Mode - Exact same 64px height & padding as DefaultNav ── */
+.power-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 clamp(10px, 2.4vw, 24px);
+    z-index: var(--z-titlebar, 1000);
+    pointer-events: none;
+}
+
+.power-top-drag-region {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: auto;
+    -webkit-app-region: drag;
+}
+
+/* ── Solid Black Punch-hole Container for Right Controls ── */
+.power-floating-pill {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+    -webkit-app-region: no-drag; /* Prevents window drag interference with button clicks */
+    background: #000000; /* Pure solid black punchhole */
+    border-radius: 99px;
+    height: 44px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 0.8vw, var(--spacing-sm, 8px));
+    padding: 0 8px 0 12px;
+    margin-right: -8px; /* Cancels out right padding so buttons align to exact same pixel as DefaultNav */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+}
+
+/* Power mode navigation layout shift */
+.power-mode-active {
+    padding-left: 68px;
+    transition: padding-left 0.2s ease;
+}

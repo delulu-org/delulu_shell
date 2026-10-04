@@ -1,0 +1,103 @@
+/* ── CuratedCard ───────────────────────────────────────────────────────────────
+   Strip poster card used in horizontal mood rows.
+   Hover: dark overlay slides up from bottom revealing title + meta.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.curated-card {
+    position: relative;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    background: #111;
+    cursor: pointer;
+    padding: 0;
+    transform-style: preserve-3d;
+    opacity: 0.82;
+    transform: translateY(var(--poster-shift, 0px));
+    transition:
+        opacity 260ms ease,
+        transform 260ms ease,
+        box-shadow 260ms ease,
+        border-color 260ms ease;
+}
+
+.curated-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 56%),
+        linear-gradient(130deg, rgba(255, 255, 255, 0.08) 0%, transparent 45%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.curated-card:hover {
+    opacity: 1;
+    transform: perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(calc(var(--poster-shift, 0px) - 3px));
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.55),
+        0 0 32px rgba(var(--feature-rgb), 0.25);
+}
+
+.curated-card:focus-visible {
+    opacity: 1;
+    outline: 1px solid rgba(255, 240, 222, 0.5);
+    outline-offset: 2px;
+}
+
+/* Staggered vertical shifts for visual rhythm */
+.curated-card:nth-child(1) { --poster-shift: 0px; }
+.curated-card:nth-child(2) { --poster-shift: 4px; }
+.curated-card:nth-child(3) { --poster-shift: 1px; }
+.curated-card:nth-child(4) { --poster-shift: 6px; }
+.curated-card:nth-child(5) { --poster-shift: 2px; }
+.curated-card:nth-child(6) { --poster-shift: 5px; }
+
+.curated-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Hover overlay: slides up from bottom */
+.curated-card__meta {
+    position: absolute;
+    z-index: 2;
+    inset: auto 12px 11px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.curated-card:hover .curated-card__meta {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.curated-card__meta strong {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff6eb;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.curated-card__meta span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.68rem;
+    color: rgba(255, 243, 227, 0.76);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

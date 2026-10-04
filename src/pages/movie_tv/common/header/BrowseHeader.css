@@ -1,0 +1,39 @@
+/* ── BrowseHeader ──────────────────────────────────────────────────────────────
+   Top tag pill ("Curated Cinema") + subtitle note shown at the top of
+   the Movies and TV-Shows pages.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.browse-header {
+    width: min(var(--cinema-max-width), 100%);
+    margin: 0 auto 42px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.browse-header__tag {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(245, 240, 231, 0.85);
+    border: 1px solid var(--cinema-outline);
+    border-radius: 999px;
+    padding: 5px 12px;
+}
+
+.browse-header__note {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    color: var(--cinema-muted);
+}
+
+@media (max-width: 720px) {
+    .browse-header {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+}

@@ -1,0 +1,208 @@
+/* ── EpisodeCard.css ──
+   Premium Apple TV+ style frosted glass episode card
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.episode-card {
+    display: flex;
+    gap: 20px;
+    padding: 16px;
+    background: var(--episode-card-bg, rgba(255, 255, 255, 0.06));
+    backdrop-filter: var(--episode-card-backdrop, blur(10px));
+    -webkit-backdrop-filter: var(--episode-card-webkit-backdrop, blur(20px));
+    border: var(--episode-card-border, 1px solid rgba(255, 255, 255, 0.08));
+    border-radius: 14px;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+    text-align: left;
+    user-select: none;
+}
+
+.episode-card:hover {
+    background: var(--episode-card-hover-bg, rgba(255, 255, 255, 0.1));
+    filter: var(--episode-card-hover-filter, none);
+    border-color: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    will-change: transform;
+}
+
+/* Locked (Unreleased) Episode */
+.episode-card--locked {
+    opacity: 0.62;
+    cursor: not-allowed;
+}
+
+.episode-card--locked:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: none;
+    box-shadow: none;
+}
+
+.episode-card--locked .episode-thumbnail img {
+    filter: grayscale(0.25) brightness(0.8);
+    transform: none;
+}
+
+.episode-card--locked .episode-play-overlay {
+    display: none;
+}
+
+/* Episode Thumbnail */
+.episode-thumbnail {
+    position: relative;
+    flex-shrink: 0;
+    width: 200px;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.episode-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.episode-card:hover:not(.episode-card--locked) .episode-thumbnail img {
+    transform: scale(1.05);
+    will-change: transform;
+}
+
+/* Thumbnail vignette */
+.episode-thumbnail::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.4) 0%,
+        transparent 50%
+    );
+    pointer-events: none;
+}
+
+/* Play overlay */
+.episode-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: 2;
+}
+
+.episode-card:hover:not(.episode-card--locked) .episode-play-overlay {
+    opacity: 1;
+}
+
+.episode-play-overlay svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Episode Info */
+.episode-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    padding: 4px 0;
+}
+
+.episode-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.episode-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.25);
+    min-width: 36px;
+    transition: color 0.2s ease;
+}
+
+.episode-card:hover .episode-number {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.episode-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.episode-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.episode-runtime {
+    letter-spacing: 0.02em;
+}
+
+.episode-release-state {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    letter-spacing: 0.01em;
+}
+
+.episode-overview {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    margin: 0;
+    margin-top: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .episode-card {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .episode-thumbnail {
+        width: 100%;
+    }
+
+    .episode-header {
+        gap: 8px;
+    }
+
+    .episode-number {
+        font-size: 1.25rem;
+        min-width: 28px;
+    }
+}

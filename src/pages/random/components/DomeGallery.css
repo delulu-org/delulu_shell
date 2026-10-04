@@ -1,0 +1,171 @@
+/* =========================
+   DOME GALLERY - 3D Sphere
+========================= */
+.dome-gallery-root {
+    --radius: 520px;
+    --circ: calc(var(--radius) * 3.14);
+    --rot-y: calc(360deg / var(--segments-x) / 2);
+    --rot-x: calc(360deg / var(--segments-y) / 2);
+    --item-width: calc(var(--circ) / var(--segments-x));
+    --item-height: calc(var(--circ) / var(--segments-y));
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.dome-gallery-root * {
+    box-sizing: border-box;
+}
+
+.dome-gallery-main {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    user-select: none;
+    background: transparent;
+    cursor: grab;
+}
+
+.dome-gallery-main.is-dragging {
+    cursor: grabbing !important;
+}
+
+.dome-gallery-main.is-dragging .dome-item-image {
+    pointer-events: none !important;
+    cursor: grabbing !important;
+}
+
+.dome-stage {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    perspective: calc(var(--radius) * 2);
+    perspective-origin: 50% 50%;
+}
+
+.dome-sphere {
+    transform: translateZ(calc(var(--radius) * -1));
+    will-change: transform;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.dome-item {
+    width: calc(var(--item-width) * var(--item-size-x));
+    height: calc(var(--item-height) * var(--item-size-y));
+    position: absolute;
+    top: -999px;
+    bottom: -999px;
+    left: -999px;
+    right: -999px;
+    margin: auto;
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    transform:
+        rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)))) rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)))) translateZ(var(--radius));
+    transform-style: preserve-3d;
+}
+
+.dome-item:hover {
+    z-index: 50;
+}
+
+.dome-item-image {
+    position: absolute;
+    inset: 10px;
+    border-radius: var(--tile-radius, 16px);
+    overflow: hidden;
+    cursor: pointer;
+    backface-visibility: hidden;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+}
+
+.dome-item-image:hover {
+    transform: translateZ(28px) scale(1.05);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.75), 0 0 24px rgba(255, 255, 255, 0.14);
+}
+
+.dome-item-image:active {
+    transform: translateZ(10px) scale(0.98);
+}
+
+.dome-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    backface-visibility: hidden;
+}
+
+/* Overlay effects */
+.dome-overlay {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    pointer-events: none;
+}
+
+.dome-overlay-radial {
+    z-index: 3;
+    background-image: radial-gradient(rgba(235, 235, 235, 0) 65%, var(--overlay-blur-color, #000) 100%);
+}
+
+.dome-overlay-blur {
+    display: none;
+}
+
+.dome-overlay-top {
+    z-index: 5;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: auto;
+    height: 120px;
+    transform: rotate(180deg);
+    background: linear-gradient(to bottom, transparent, var(--overlay-blur-color, #000));
+}
+
+.dome-overlay-bottom {
+    z-index: 5;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--overlay-blur-color, #000));
+}
+
+/* Scroll lock helper */
+.dg-scroll-lock {
+    overflow: hidden !important;
+}
+
+/* Skeleton loading for posters */
+.dome-skeleton {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.06);
+    animation: domeSkeletonPulse 1.5s ease-in-out infinite alternate;
+    border-radius: var(--tile-radius, 16px);
+}
+
+@keyframes domeSkeletonPulse {
+    0% {
+        opacity: 0.35;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}

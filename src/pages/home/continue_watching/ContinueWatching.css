@@ -1,0 +1,175 @@
+/* ── Continue Watching section ── */
+
+.continue-watching-section {
+    position: relative;
+}
+
+/* ── Continue Watching row ── */
+
+.continue-watching-row {
+    display: flex;
+    gap: clamp(20px, 1.8vw, 28px);
+    padding: 24px clamp(24px, 4vw, 48px) 12px;
+    margin-top: -24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.continue-watching-row::-webkit-scrollbar {
+    display: none;
+}
+
+/* ── Continue Watching cards ── */
+
+.continue-watching-item {
+    position: relative;
+    width: clamp(170px, 15.2vw, 250px);
+    flex-shrink: 0;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0c1016;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.continue-watching-item:hover {
+    transform: translateY(-2px);
+    will-change: transform;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.continue-watching-item img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+    position: relative;
+    z-index: 2;
+}
+
+.continue-watching-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 10%, rgba(0, 0, 0, 0.04) 52%);
+    z-index: 3;
+}
+
+.continue-watching-item-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(14, 12, 18, 0.88);
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    contain: layout paint;
+    transform: translateZ(0);
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, opacity 180ms ease;
+    z-index: 10;
+    opacity: 0;
+}
+
+.continue-watching-item:hover .continue-watching-item-remove {
+    opacity: 1;
+}
+
+.continue-watching-item-remove:hover {
+    background: rgba(225, 29, 46, 0.92);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.continue-watching-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    padding: 0 10px;
+    z-index: 4;
+    text-align: left;
+}
+
+.continue-watching-title {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(248, 243, 235, 0.97);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.continue-watching-meta {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(232, 227, 220, 0.72);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+}
+
+.continue-watching-percent {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 5;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(240, 235, 227, 0.85);
+    background: rgba(12, 10, 16, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    padding: 2px 7px;
+    letter-spacing: 0.04em;
+    contain: layout paint;
+}
+
+.continue-watching-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 6;
+    overflow: hidden;
+}
+
+.continue-watching-progress-fill {
+    height: 100%;
+    background: #E11D2E;
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+}
+
+.continue-watching-progress-fill::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    background: linear-gradient(90deg, transparent, rgba(255, 200, 200, 0.25));
+    animation: shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0; }
+    50%       { opacity: 1; }
+}

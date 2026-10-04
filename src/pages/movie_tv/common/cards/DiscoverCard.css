@@ -1,0 +1,28 @@
+/* ── DiscoverCard ──────────────────────────────────────────────────────────────
+   Grid poster card used in the infinite-scroll discover section.
+   Hover: subtle scale + elevation. External HoverPreview tooltip fires after
+   1 second of hovering (managed by parent DiscoverGrid).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.discover-card {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #111;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.discover-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
+}
+
+.discover-card__img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+}

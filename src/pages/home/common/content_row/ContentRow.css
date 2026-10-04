@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   CONTENT ROW - Netflix Premium Style
+   ============================================ */
+
+.content-row {
+    margin-bottom: var(--spacing-2xl);
+    position: relative;
+}
+
+/* ============================================
+   HEADER - Title + Nav Buttons
+   ============================================ */
+
+.content-row-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(16px, 3.4vw, var(--spacing-xl));
+    margin-bottom: var(--spacing-md);
+}
+
+.content-row-header-nav-only {
+    justify-content: flex-end;
+}
+
+.content-row-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+/* ============================================
+   NAV BUTTONS - Smooth Premium Animations
+   ============================================ */
+
+.content-row-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.content-row-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.content-row-nav-btn:hover:not(.disabled) {
+    border-color: rgba(255, 60, 60, 0.8);
+}
+
+.content-row-nav-btn:active:not(.disabled) {
+    border-color: rgba(255, 40, 40, 1);
+}
+
+.content-row-nav-btn.disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+    transform: scale(0.9);
+}
+
+/* ============================================
+   CONTENT ITEMS - Smooth Scroll with Animation
+   ============================================ */
+
+.content-row-items {
+    display: flex;
+    gap: clamp(20px, 1.8vw, 28px);
+    padding: var(--spacing-sm) clamp(16px, 3.4vw, var(--spacing-xl));
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+}
+
+.content-row-items::-webkit-scrollbar {
+    display: none;
+}
+
+/* Skeleton loading with pulse */
+.content-row-items .skeleton-card {
+    aspect-ratio: 2/3;
+    width: clamp(140px, 13.5vw, 220px);
+    flex-shrink: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    animation: skeletonPulse 2s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - Mobile Optimized
+   ============================================ */
+
+@media (max-width: 768px) {
+    .content-row-header {
+        padding: 0 var(--spacing-md);
+        margin-bottom: 10px;
+    }
+
+    .content-row-items {
+        padding: var(--spacing-sm) var(--spacing-md);
+        gap: 16px;
+    }
+
+    .content-row-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .content-row-nav-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 560px) {
+    .content-row {
+        margin-bottom: clamp(20px, 4vh, var(--spacing-2xl));
+    }
+
+    .content-row-header {
+        padding: 0 12px;
+    }
+
+    .content-row-items {
+        padding: 8px 12px;
+        gap: 10px;
+    }
+
+    .content-row-title {
+        font-size: 1rem;
+    }
+
+    .content-row-nav {
+        gap: 6px;
+    }
+
+    .content-row-nav-btn {
+        width: 30px;
+        height: 30px;
+    }
+}

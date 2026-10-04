@@ -1,0 +1,106 @@
+/* ── HoverPreview ──────────────────────────────────────────────────────────────
+   Floating viewport-aware tooltip that appears above/below a DiscoverCard
+   after 1 second of hovering. Shows centered title, pills, and overview
+   matching the exact design from tauri.deluluapp.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.hover-preview {
+    position: fixed;
+    transform: translate(-50%, calc(-100% - 14px));
+    width: min(390px, calc(100vw - 32px));
+    max-height: min(260px, calc(100vh - 32px));
+    overflow: hidden;
+    padding: 22px 24px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(26, 26, 30, 0.88);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+    box-shadow:
+        0 24px 54px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    pointer-events: none;
+    z-index: 100;
+    text-align: center;
+    animation: hoverPreviewPop 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hover-preview--below {
+    transform: translate(-50%, 14px);
+    animation-name: hoverPreviewPopBelow;
+}
+
+@keyframes hoverPreviewPop {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-100% - 8px)) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, calc(-100% - 14px)) scale(1);
+    }
+}
+
+@keyframes hoverPreviewPopBelow {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 8px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 14px) scale(1);
+    }
+}
+
+.hover-preview__title {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 14px;
+    letter-spacing: -0.2px;
+    line-height: 1.35;
+    text-align: center;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.hover-preview__meta {
+    margin: 0 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.hover-preview__meta span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 5px 12px;
+}
+
+.hover-preview__overview {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+    text-align: center;
+    display: -webkit-box;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

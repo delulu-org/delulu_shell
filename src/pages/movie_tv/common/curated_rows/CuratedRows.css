@@ -1,0 +1,112 @@
+/* ── CuratedRows ───────────────────────────────────────────────────────────────
+   Section containing multiple horizontal mood/theme rows.
+   Each row has a heading, subtitle, and a grid of CuratedCards.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.curated-rows {
+    width: min(var(--cinema-row-width), 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 58px;
+}
+
+.curated-row {
+    text-align: center;
+    padding-inline: clamp(10px, 1vw, 18px);
+}
+
+.curated-row--first {
+    margin-top: 18px;
+}
+
+.curated-row:nth-child(2) {
+    margin-top: 8px;
+}
+
+.curated-row:nth-child(3) {
+    margin-top: 2px;
+}
+
+.curated-row h2,
+.curated-row p {
+    width: min(820px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.curated-row h2 {
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+    font-weight: 600;
+    color: #f6efe4;
+    margin-bottom: 10px;
+    padding-bottom: 18px;
+}
+
+.curated-row h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: clamp(88px, 9vw, 128px);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 236, 211, 0.55) 50%, transparent 100%);
+}
+
+.curated-row h2::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 233, 204, 0.7);
+    box-shadow: 0 0 14px rgba(var(--feature-rgb), 0.28);
+}
+
+.curated-row p {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.84rem;
+    color: var(--cinema-muted);
+    margin-bottom: 24px;
+}
+
+.curated-strip {
+    display: grid;
+    width: 100%;
+    max-width: min(1180px, calc(100vw - 160px));
+    margin: 0 auto;
+    grid-template-columns: repeat(6, clamp(120px, 12.5vw, 210px));
+    justify-content: center;
+    gap: var(--cinema-card-gap);
+}
+
+@media (max-width: 1360px) {
+    .curated-strip {
+        max-width: min(1060px, calc(100vw - 220px));
+        grid-template-columns: repeat(6, minmax(114px, 156px));
+    }
+}
+
+@media (max-width: 1120px) {
+    .curated-strip {
+        max-width: min(760px, calc(100vw - 100px));
+        grid-template-columns: repeat(3, minmax(130px, 190px));
+    }
+}
+
+@media (max-width: 720px) {
+    .curated-rows {
+        gap: 62px;
+    }
+
+    .curated-strip {
+        max-width: min(520px, calc(100vw - 44px));
+        grid-template-columns: repeat(2, minmax(130px, 180px));
+    }
+}

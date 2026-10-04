@@ -1,0 +1,169 @@
+/* ==========================================================================
+   Cast Row Component Styles
+   Bounded 7-item container with soften edge shadows and swipe support
+   ========================================================================== */
+
+.details-cast {
+    margin-top: 28px;
+    margin-bottom: 36px;
+    width: 672px;
+    max-width: 100%;
+}
+
+.details-cast-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: -0.01em;
+    margin: 0 0 16px 0;
+}
+
+/* Viewport Container: Constrained to 7 items width (7 * 80px + 6 * 18px = 668px + padding)
+   Padding buffer prevents top/bottom cropping during translateY(-6px) hover effects */
+.details-cast-viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 14px;
+    margin-top: -14px;
+    padding-bottom: 16px;
+    margin-bottom: -16px;
+}
+
+/* Soften Edge Shadows */
+.details-cast-edge-shadow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.25s ease-out, background 0.2s ease;
+}
+
+.details-cast-edge-left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg-primary, #0a0a10) 0%, transparent 100%);
+}
+
+.details-cast-edge-right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg-primary, #0a0a10) 0%, transparent 100%);
+}
+
+.details-cast-edge-shadow.visible {
+    opacity: 1;
+}
+
+/* Horizontally Scrollable Cast List */
+.details-cast-list {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
+
+    /* Smooth scrolling & dragging styles */
+    cursor: grab;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    scrollbar-width: none; /* Firefox */
+}
+
+.details-cast-list::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+.details-cast-list.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+    user-select: none;
+}
+
+/* Cast Member Card */
+.details-cast-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 80px;
+    width: 80px;
+    cursor: pointer;
+    scroll-snap-align: start;
+    outline: none;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.details-cast-member:hover,
+.details-cast-member:focus-visible {
+    will-change: transform;
+    transform: translateY(-6px);
+}
+
+.details-cast-photo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
+    transition: border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.details-cast-member:hover .details-cast-photo,
+.details-cast-member:focus-visible .details-cast-photo {
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.details-cast-name {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    width: 100%;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    user-select: none;
+}
+
+.details-cast-member:hover .details-cast-name,
+.details-cast-member:focus-visible .details-cast-name {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Cast Placeholder */
+.details-cast-placeholder {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.details-cast-placeholder.hidden {
+    display: none;
+}
+
+.details-cast-member:hover .details-cast-placeholder,
+.details-cast-member:focus-visible .details-cast-placeholder {
+    border-color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.5);
+}

@@ -1,0 +1,165 @@
+/* ── How Are You Feeling (Browse by Mood) Editorial Section ── */
+
+.mood-section {
+    position: relative;
+}
+
+.mood-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 clamp(24px, 4vw, 48px);
+    margin-bottom: 20px;
+}
+
+.mood-chip {
+    border: 1px solid rgba(232, 227, 220, 0.16);
+    background: transparent;
+    color: rgba(232, 227, 220, 0.62);
+    padding: 8px 16px;
+    border-radius: 1px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.mood-chip.active {
+    border-color: rgba(225, 29, 46, 0.8);
+    color: rgba(249, 245, 238, 0.98);
+    box-shadow: inset 0 0 0 1px rgba(225, 29, 46, 0.18);
+    background: rgba(225, 29, 46, 0.08);
+}
+
+.mood-editorial-grid {
+    margin: 0 clamp(24px, 4vw, 48px);
+    border-top: 1px solid rgba(232, 227, 220, 0.1);
+    border-bottom: 1px solid rgba(232, 227, 220, 0.1);
+    border-left: 1px solid rgba(232, 227, 220, 0.08);
+    border-right: 1px solid rgba(232, 227, 220, 0.08);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background: rgba(232, 227, 220, 0.04);
+}
+
+.mood-editorial-item {
+    position: relative;
+    border: none;
+    border-bottom: 1px solid rgba(232, 227, 220, 0.08);
+    border-right: 1px solid rgba(232, 227, 220, 0.06);
+    background: #070809;
+    min-height: 176px;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 22px 28px 58px;
+    color: inherit;
+    cursor: pointer;
+    transition: background 200ms ease;
+}
+
+.mood-editorial-item:nth-child(2n) {
+    border-right: none;
+}
+
+.mood-editorial-item:nth-last-child(-n + 2) {
+    border-bottom: none;
+}
+
+.mood-editorial-item:hover {
+    background: #0d1014;
+}
+
+.mood-item-rank {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(5.4rem, 7vw, 8rem);
+    font-weight: 700;
+    line-height: 0.84;
+    color: rgba(28, 3, 3, 0.24);
+    -webkit-text-stroke: 2.2px rgba(241, 88, 102, 0.96);
+    text-shadow: 0 0 14px rgba(225, 29, 46, 0.32), 0 0 30px rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.04em;
+}
+
+.mood-item-poster {
+    position: relative;
+    z-index: 1;
+    width: 78px;
+    aspect-ratio: 2 / 3;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.mood-item-info {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.mood-item-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(24px, 2vw, 34px);
+    font-weight: 500;
+    color: rgba(248, 244, 237, 0.97);
+    line-height: 1.2;
+    margin-bottom: 4px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.mood-item-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(232, 227, 220, 0.48);
+}
+
+@media (max-width: 768px) {
+    .mood-chip-row {
+        padding: 0 16px;
+    }
+
+    .mood-editorial-grid {
+        margin: 0 16px;
+        grid-template-columns: 1fr;
+    }
+
+    .mood-editorial-item {
+        border-right: none;
+        min-height: 128px;
+        padding: 20px 14px 20px 44px;
+    }
+
+    .mood-editorial-item:nth-last-child(-n + 2) {
+        border-bottom: 1px solid rgba(232, 227, 220, 0.08);
+    }
+
+    .mood-editorial-item:last-child {
+        border-bottom: none;
+    }
+
+    .mood-item-title {
+        font-size: 24px;
+    }
+}

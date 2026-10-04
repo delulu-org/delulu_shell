@@ -1,0 +1,30 @@
+.tmdb-rating-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    vertical-align: middle;
+}
+
+.tmdb-rating-logo-svg {
+    height: 12px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.tmdb-rating-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 1;
+}
+
+/* In details page metadata row, scale up slightly */
+.details-rating-tmdb .tmdb-rating-logo-svg {
+    height: 15px;
+}
+
+.details-rating-tmdb .tmdb-rating-text {
+    font-size: 18px;
+    font-weight: 800;
+}

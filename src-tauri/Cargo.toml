@@ -1,0 +1,39 @@
+[package]
+name = "delulu"
+version = "1.0.0"
+description = "Delulu - Modern Media Browser"
+authors = ["Delulu Team"]
+edition = "2021"
+
+[lib]
+name = "delulu_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+dotenvy = "0.15"
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dotenvy = "0.15"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "fs"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+obfstr = "0.4"
+
+[features]
+devtools = ["tauri/devtools"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+overflow-checks = false

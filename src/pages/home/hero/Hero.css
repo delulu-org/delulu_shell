@@ -1,0 +1,529 @@
+/* ============================================================
+   HERO CAROUSEL — Delulu Editorial Redesign
+   Cormorant Garamond serif titles · Premium red #E11D2E
+   All backdrop slide logic preserved 1:1
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
+/* ── Container ─────────────────────────────────────────────── */
+
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 85vh;
+    min-height: 580px;
+    max-height: 840px;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+}
+
+.hero-carousel-dragging {
+    cursor: grabbing;
+}
+
+/* ── Continuous Ken Burns Stage — Never resets zoom on slide change ── */
+
+.hero-backdrop-stage {
+    position: absolute;
+    inset: -2%;
+    width: 104%;
+    height: 104%;
+    pointer-events: none;
+    z-index: 0;
+    transform-origin: center center;
+    will-change: transform;
+    animation: heroBackdropKenBurns 26s ease-in-out infinite alternate !important;
+}
+
+@keyframes heroBackdropKenBurns {
+    from { transform: scale(1) translate3d(0, 0, 0); }
+    to   { transform: scale(1.08) translate3d(0, -2.2%, 0); }
+}
+
+/* ── Backdrop Layers (Opacity Dissolve Blend only, no scale on layers) ── */
+
+.hero-backdrop {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    opacity: 1;
+    transform: none !important;
+    will-change: opacity;
+}
+
+.hero-backdrop-static {
+    z-index: 0;
+}
+
+/* Base layer remains visible underneath */
+.hero-backdrop-from {
+    z-index: 0;
+    opacity: 1;
+}
+
+/* Incoming layer dissolves smoothly on top (zero horizontal sliding, zero zoom reset) */
+.hero-backdrop-to {
+    z-index: 1;
+    opacity: 0;
+    animation: heroDissolveBlend 1000ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+@keyframes heroDissolveBlend {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ── Gradient overlays ─────────────────────────────────────── */
+
+/* Left vignette — heavier than original to anchor content */
+.hero-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            142% 112% at -14% 50%,
+            rgba(7, 8, 11, 0.6) 0%,
+            rgba(7, 8, 11, 0.4) 36%,
+            rgba(7, 8, 11, 0.2) 58%,
+            rgba(7, 8, 11, 0.08) 72%,
+            transparent 90%
+        ),
+        linear-gradient(
+            to right,
+            rgba(7, 8, 11, 0.22) 0%,
+            rgba(7, 8, 11, 0.12) 22%,
+            transparent 46%
+        );
+    z-index: 1;
+}
+
+/* Bottom fade — merges hero into home-content */
+.hero-gradient-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 340px;
+    background: linear-gradient(to top, var(--color-bg-primary, #0a0a10) 0%, var(--color-bg-hero-fade, rgba(10, 10, 16, 0.7)) 45%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ── Floating poster (right side) ──────────────────────────── */
+/* ── Content block ─────────────────────────────────────────── */
+
+.hero-content {
+    position: absolute;
+    left: clamp(32px, 4vw, 64px);
+    bottom: clamp(52px, 11vh, 100px);
+    max-width: clamp(340px, 44vw, 580px);
+    z-index: 10;
+}
+
+/* ── Eyebrow label ─────────────────────────────────────────── */
+
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.hero-eyebrow-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    color: rgba(235, 70, 86, 0.98);
+    text-transform: uppercase;
+}
+
+.hero-eyebrow-line {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: rgba(235, 70, 86, 0.98);
+    opacity: 0.92;
+}
+
+/* ── Title — Cormorant Garamond serif ──────────────────────── */
+
+.hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 6.2vw, 82px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: rgba(253, 250, 245, 0.99);
+    margin-bottom: 20px;
+    min-height: 1em;
+    text-shadow: 0 6px 26px rgba(0, 0, 0, 0.82), 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.hero-logo-container {
+    margin-bottom: 24px;
+    max-width: 100%;
+    min-height: clamp(80px, 12vh, 180px);
+    display: flex;
+    align-items: flex-end;
+}
+
+.hero-logo-img {
+    max-width: clamp(200px, 28vw, 420px);
+    max-height: clamp(80px, 12vh, 180px);
+    object-fit: contain;
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.6));
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-logo-img.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Meta row ──────────────────────────────────────────────── */
+
+.hero-text-reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-text-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.hero-tmdb-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+}
+
+.hero-tmdb-rating .tmdb-rating-logo-svg {
+    height: 11px;
+    width: auto;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+
+.hero-tmdb-rating .tmdb-rating-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(244, 239, 231, 0.98);
+    letter-spacing: 0.02em;
+    line-height: 1;
+}
+
+.hero-meta-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(232, 227, 220, 0.55);
+    flex-shrink: 0;
+}
+
+.hero-year {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(232, 227, 220, 0.78);
+    text-transform: uppercase;
+}
+
+.hero-type {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    color: rgba(238, 233, 226, 0.84);
+    text-transform: uppercase;
+    border: 1px solid rgba(232, 227, 220, 0.25);
+    padding: 3px 8px;
+    border-radius: 1px;
+}
+
+/* ── Overview ──────────────────────────────────────────────── */
+
+.hero-overview {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(240, 235, 228, 0.83);
+    margin-bottom: 28px;
+    min-height: 5.2em;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.75);
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hero-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: #E11D2E;
+    border: none;
+    border-radius: 2px;
+    color: #f0ebe3;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 200ms ease, box-shadow 200ms ease;
+}
+
+.hero-btn-primary:hover {
+    background: #f03a4a;
+    box-shadow: 0 0 28px rgba(225, 29, 46, 0.45);
+}
+
+.hero-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: rgba(14, 16, 20, 0.45);
+    border: 1px solid rgba(232, 227, 220, 0.22);
+    border-radius: 2px;
+    color: rgba(232, 227, 220, 0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    contain: layout paint;
+    transform: translateZ(0);
+    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.hero-btn-ghost:hover {
+    background: rgba(24, 26, 32, 0.75);
+    border-color: rgba(232, 227, 220, 0.5);
+    color: rgba(232, 227, 220, 0.95);
+}
+
+.hero-btn-mute {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: rgba(14, 16, 20, 0.45);
+    border: 1px solid rgba(232, 227, 220, 0.22);
+    border-radius: 50%;
+    color: rgba(232, 227, 220, 0.7);
+    cursor: pointer;
+    contain: layout paint;
+    transform: translateZ(0);
+    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+    padding: 0;
+}
+
+.hero-btn-mute:hover {
+    border-color: rgba(232, 227, 220, 0.5);
+    background: rgba(24, 26, 32, 0.75);
+    color: rgba(232, 227, 220, 1);
+}
+
+/* ── Trailer Layer ─────────────────────────────────────────── */
+
+.hero-trailer-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0; /* Above backdrop images but below gradients */
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    background: var(--color-bg-primary, #0a0a10);
+    overflow: hidden;
+}
+
+.hero-trailer-container.is-visible {
+    opacity: 1;
+}
+
+.hero-trailer-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Scale by 1.3 (30%) to push baked-in top/bottom black bars outside the container */
+    transform: translate(-50%, -50%) scale(1.3); 
+    pointer-events: none;
+    image-rendering: high-quality;
+}
+
+/* ── Dots navigation ───────────────────────────────────────── */
+
+.hero-dots {
+    position: absolute;
+    bottom: clamp(20px, 3vh, 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+    animation: fadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.6s backwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.hero-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(232, 227, 220, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 0;
+}
+
+.hero-dot:hover {
+    background: rgba(232, 227, 220, 0.45);
+}
+
+.hero-dot-active {
+    width: 22px;
+    background: #E11D2E;
+    opacity: 0.85;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    .hero-content {
+        max-width: 480px;
+    }
+
+    .hero-carousel {
+        min-height: 520px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-carousel {
+        height: 70vh;
+        min-height: 500px;
+    }
+
+    .hero-content {
+        left: var(--spacing-md, 16px);
+        right: var(--spacing-md, 16px);
+        max-width: none;
+        bottom: 16%;
+    }
+
+    .hero-title {
+        font-size: clamp(38px, 10vw, 52px);
+    }
+
+    .hero-overview {
+        margin-bottom: 20px;
+        line-height: 1.6;
+        min-height: 4.5em;
+    }
+
+    .hero-btn-primary,
+    .hero-btn-ghost {
+        padding: 10px 18px;
+        font-size: 10px;
+    }
+
+    .hero-gradient {
+        background: linear-gradient(
+            to top,
+            rgba(10, 8, 8, 0.95) 0%,
+            rgba(10, 8, 8, 0.7) 50%,
+            transparent 100%
+        );
+    }
+
+    .hero-backdrop-enter.hero-backdrop-next,
+    .hero-backdrop-exit.hero-backdrop-next,
+    .hero-backdrop-enter.hero-backdrop-prev,
+    .hero-backdrop-exit.hero-backdrop-prev {
+        animation-duration: 900ms !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero-carousel {
+        height: 64vh;
+        min-height: 460px;
+    }
+
+    .hero-content {
+        left: 12px;
+        right: 12px;
+        bottom: 14%;
+    }
+
+    .hero-meta {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .hero-title {
+        font-size: clamp(34px, 12vw, 46px);
+        margin-bottom: 14px;
+    }
+
+    .hero-overview {
+        font-size: 12px;
+        margin-bottom: 14px;
+    }
+
+    .hero-dot {
+        width: 5px;
+        height: 5px;
+    }
+
+    .hero-dot-active {
+        width: 18px;
+    }
+}
+
+/* ── Dragging state ────────────────────────────────────────── */
+.hero-carousel-dragging .hero-content > * {
+    animation: none !important;
+}
+
+

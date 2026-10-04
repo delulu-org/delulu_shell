@@ -1,0 +1,347 @@
+/* ==========================================================================
+   Details Page Skeleton UI
+   1:1 layout parity with DetailHero, HeroPoster, HeroInfo, and CastRow.
+   Minimal, sleek, dark cinematic neutral shimmer.
+   ========================================================================== */
+
+.details-skeleton-page {
+    min-height: 100vh;
+    position: relative;
+    background: var(--color-bg-primary, #0a0a10);
+    transition: background-color 0.2s ease;
+    overflow-x: clip;
+    color: var(--color-text-primary, #ffffff);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ── Standard Neutral Skeleton Shimmer ────────────────────────────────────── */
+.details-skeleton-page .details-skel-item {
+    background: rgba(255, 255, 255, 0.055);
+    animation: detailsSkeletonPulse 1.6s ease-in-out infinite alternate;
+    border: none;
+}
+
+@keyframes detailsSkeletonPulse {
+    0% {
+        opacity: 0.32;
+    }
+    100% {
+        opacity: 0.85;
+    }
+}
+
+/* ── Ambient Backdrop Glow & Gradient ─────────────────────────────────────── */
+.details-skel-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 85vh;
+    background: radial-gradient(ellipse at 60% 25%, rgba(255, 255, 255, 0.035) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.details-skel-gradient {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: background 0.2s ease;
+    background:
+        linear-gradient(to bottom,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.5) 0%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0) 20%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0) 35%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.2) 50%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.5) 65%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.85) 78%,
+            var(--color-bg-primary, #0a0a10) 84%,
+            var(--color-bg-primary, #0a0a10) 100%),
+        linear-gradient(to right,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.72) 0%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.25) 45%,
+            transparent 100%),
+        radial-gradient(ellipse at center,
+            transparent 40%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.5) 100%);
+}
+
+/* ── 2-Column Hero Content Grid (1:1 with .details-content) ─────────────────── */
+.details-skel-content {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 56px;
+    padding: 0 80px;
+    padding-top: 35vh;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .details-skel-content {
+        grid-template-columns: 220px 1fr;
+        gap: 36px;
+        padding: 0 40px;
+        padding-top: 28vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .details-skel-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 0 20px;
+        padding-top: 18vh;
+    }
+    .details-skel-poster-wrapper {
+        position: relative !important;
+        top: 0 !important;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+}
+
+/* ── Floating Poster Silhouette (1:1 with .details-poster-wrapper) ────────── */
+.details-skel-poster-wrapper {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+    height: fit-content;
+    z-index: 5;
+}
+
+.details-skel-poster {
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Right Column: Info Section (1:1 with .details-info) ──────────────────── */
+.details-skel-info {
+    padding-bottom: 80px;
+}
+
+/* Title / Logo silhouette */
+.details-skel-logo {
+    height: clamp(48px, 5.5vw, 68px);
+    width: clamp(260px, 32vw, 420px);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* Metadata Row (Rating, Year, Runtime) */
+.details-skel-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.details-skel-pill {
+    height: 26px;
+    border-radius: 999px;
+}
+
+/* Genres Row */
+.details-skel-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.details-skel-genre-tag {
+    height: 30px;
+    border-radius: 20px;
+}
+
+/* Tagline */
+.details-skel-tagline {
+    height: 16px;
+    width: min(340px, 80%);
+    border-radius: 4px;
+    margin-bottom: 22px;
+}
+
+/* Overview 4-line paragraph */
+.details-skel-overview-wrap {
+    max-width: 640px;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.details-skel-line {
+    height: 14px;
+    border-radius: 4px;
+}
+
+/* Action Buttons Row */
+.details-skel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 48px;
+}
+
+.details-skel-btn {
+    height: 46px;
+    border-radius: 999px;
+}
+
+.details-skel-btn-circle {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+}
+
+/* ── Cast Row Silhouette (1:1 with new 7-item CastRow) ─────────────────────── */
+.details-skel-cast {
+    margin-top: 28px;
+    margin-bottom: 36px;
+    width: 672px;
+    max-width: 100%;
+}
+
+.details-skel-cast-heading {
+    height: 22px;
+    width: 56px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.details-skel-cast-viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 14px;
+    margin-top: -14px;
+    padding-bottom: 16px;
+    margin-bottom: -16px;
+}
+
+.details-skel-cast-list {
+    display: flex;
+    gap: 18px;
+    padding: 10px 2px;
+}
+
+.details-skel-cast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 80px;
+    width: 80px;
+}
+
+.details-skel-cast-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+}
+
+.details-skel-cast-name {
+    width: 56px;
+    height: 10px;
+    border-radius: 3px;
+}
+
+/* Soften Edge Shadows for Cast Skeleton */
+.details-skel-cast-edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    pointer-events: none;
+    z-index: 5;
+    transition: background 0.2s ease;
+}
+
+.details-skel-cast-edge-left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg-primary, #0a0a10) 0%, transparent 100%);
+}
+
+.details-skel-cast-edge-right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg-primary, #0a0a10) 0%, transparent 100%);
+}
+
+/* ── TV Episodes Section Silhouette (1:1 with EpisodeSection) ─────────────── */
+.details-skel-episodes {
+    margin-top: 12px;
+    max-width: 880px;
+}
+
+.details-skel-season-dropdown {
+    width: 140px;
+    height: 42px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.details-skel-episodes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.details-skel-episode-card {
+    display: flex;
+    gap: 20px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+}
+
+.details-skel-episode-thumb {
+    width: 220px;
+    height: 124px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.details-skel-episode-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+.details-skel-episode-title {
+    width: 45%;
+    height: 18px;
+    border-radius: 4px;
+}
+
+.details-skel-episode-meta {
+    width: 28%;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.details-skel-episode-desc {
+    width: 88%;
+    height: 13px;
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    .details-skel-episode-card {
+        flex-direction: column;
+    }
+    .details-skel-episode-thumb {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+}

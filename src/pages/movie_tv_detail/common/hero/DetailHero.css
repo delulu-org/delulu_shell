@@ -1,0 +1,224 @@
+/* ── DetailHero.css ──
+   Replicates the exact cinematic 2-column hero layout from tauri.deluluapp/Details.css
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Hero Backdrop */
+.details-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 85vh;
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+.details-backdrop-gradient {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: background 0.2s ease;
+    background:
+        linear-gradient(to bottom,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.5) 0%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0) 20%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0) 35%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.2) 50%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.5) 65%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.85) 78%,
+            var(--color-bg-primary, #0a0a10) 84%,
+            var(--color-bg-primary, #0a0a10) 100%),
+        linear-gradient(to right,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.72) 0%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.25) 45%,
+            transparent 100%),
+        radial-gradient(ellipse at center,
+            transparent 40%,
+            rgba(var(--color-bg-rgb, 10, 10, 16), 0.5) 100%);
+}
+
+/* Hero Content 2-Column Grid */
+.details-content {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 56px;
+    padding: 0 80px;
+    padding-top: 35vh;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .details-content {
+        grid-template-columns: 220px 1fr;
+        gap: 36px;
+        padding: 0 40px;
+        padding-top: 28vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .details-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 0 20px;
+        padding-top: 18vh;
+    }
+    .details-poster-wrapper {
+        position: relative !important;
+        top: 0 !important;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+}
+
+/* Floating Poster Card */
+.details-poster-wrapper {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+    height: fit-content;
+    border-radius: 16px;
+    z-index: 5;
+}
+
+.details-poster {
+    width: calc(100% + 4px);
+    margin: -2px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    display: block;
+}
+
+/* Info Section */
+.details-info {
+    padding-bottom: 80px;
+}
+
+.details-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: #fff;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.details-logo-wrap {
+    margin-bottom: 16px;
+    max-width: min(680px, 92%);
+}
+
+.details-tagline {
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
+    letter-spacing: 0.01em;
+}
+
+.details-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.details-meta > span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.details-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.genre-tag {
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(243, 233, 233, 0.9);
+    display: inline-flex;
+    align-items: center;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    user-select: none;
+}
+
+.genre-tag:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+
+.details-overview-wrap {
+    max-width: 640px;
+    margin-bottom: 36px;
+}
+
+.details-overview {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s ease;
+}
+
+.details-overview.expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+}
+
+.details-overview-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.details-overview-toggle:hover {
+    color: #ffffff;
+}
+
+.details-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 48px;
+}

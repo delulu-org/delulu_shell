@@ -1,0 +1,81 @@
+/* ============================================================
+   HOME PAGE — Delulu Editorial Redesign
+   Premium red #E11D2E · Cormorant Garamond · DM Sans
+   All continue-watching / top3 card logic preserved 1:1
+   ============================================================ */
+
+/* ── Page shell ────────────────────────────────────────────── */
+
+.home-page {
+    min-height: 100vh;
+    position: relative;
+    background: var(--color-bg-primary, #0a0a10);
+    transition: background-color 0.2s ease;
+}
+
+/* ── Body content — overlaps hero bottom fade ──────────────── */
+
+.home-content {
+    position: relative;
+    margin-top: clamp(-138px, -10vh, -92px);
+    z-index: 20;
+    padding-top: var(--spacing-md, 16px);
+    padding-bottom: var(--spacing-3xl, 48px);
+}
+
+/* ── Section wrapper ───────────────────────────────────────── */
+
+.home-section {
+    padding: 48px 0 0;
+}
+
+/* ── Section header — label + serif title + rule ───────────── */
+
+.home-section-header {
+    padding: 0 clamp(24px, 4vw, 48px);
+    margin-bottom: 22px;
+}
+
+.home-section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: rgba(181, 42, 42, 0.95);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.home-section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(30px, 3vw, 40px);
+    font-weight: 400;
+    color: rgba(242, 236, 228, 0.96);
+    line-height: 1;
+    margin: 0 0 10px;
+}
+
+.home-section-rule {
+    width: 30px;
+    height: 1px;
+    background: #E11D2E;
+    opacity: 0.6;
+}
+
+/* Hide the built-in ContentRow header when title="" */
+.home-section .content-row-header:has(h2:empty) {
+    display: none;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .home-content {
+        margin-top: clamp(-72px, -6.5vh, -44px);
+        padding-top: var(--spacing-sm, 8px);
+    }
+
+    .home-section {
+        padding-top: 36px;
+    }
+}
